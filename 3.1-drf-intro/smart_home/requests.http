@@ -38,6 +38,17 @@ Content-Type: application/json
   "temperature": 22.3
 }
 
+
+###
+POST {{baseUrl}}/measurements/
+Content-Type: application/json
+
+{
+  "sensor": 1,
+  "temperature": 22.3,
+  "image": "/Users/alexbog/code/dj-netology/3.1-drf-intro/smart_home/measurement/image/measurements/1.jpg"
+}
+
 ###
 
 # получение информации по датчику
