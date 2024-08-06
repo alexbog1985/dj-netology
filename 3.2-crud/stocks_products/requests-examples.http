@@ -11,6 +11,17 @@ Content-Type: application/json
   "description": "Лучшие помидоры на рынке"
 }
 
+
+###
+# еще один продукт
+POST {{baseUrl}}/products/
+Content-Type: application/json
+
+{
+  "title": "Яблоко",
+  "description": "Лучшие яблоки на рынке"
+}
+
 ###
 
 # получение продуктов
@@ -64,7 +75,7 @@ Content-Type: application/json
 ###
 
 # обновляем записи на складе
-PATCH {{baseUrl}}/stocks/4/
+PATCH {{baseUrl}}/stocks/3/
 Content-Type: application/json
 
 {
@@ -86,4 +97,10 @@ Content-Type: application/json
 
 # поиск складов, где есть определенный продукт
 GET {{baseUrl}}/stocks/?products=2
+Content-Type: application/json
+
+###
+
+# поиск складов, где есть определенный продукт
+GET {{baseUrl}}/stocks/?search=помид
 Content-Type: application/json
