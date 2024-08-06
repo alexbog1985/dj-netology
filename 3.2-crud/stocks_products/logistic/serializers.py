@@ -3,23 +3,22 @@ from .models import Product, StockProduct, Stock
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    
     class Meta:
         model = Product
-        fields = ['title', 'description']
+        fields = ['id', 'title', 'description']
 
 
 class ProductPositionSerializer(serializers.ModelSerializer):
     # настройте сериализатор для позиции продукта на складе
     class Meta:
         model = StockProduct
-        fields = ['product', 'quantity']
+        fields = ['product', 'quantity', 'price']
 
 
 class StockSerializer(serializers.ModelSerializer):
     positions = ProductPositionSerializer(many=True)
 
-    # настройте сериализатор для склада\
+    # настройте сериализатор для склада
     class Meta:
         model = Stock
         fields = ['address', 'positions']
@@ -34,10 +33,7 @@ class StockSerializer(serializers.ModelSerializer):
         # в нашем случае: таблицу StockProduct
         # с помощью списка positions
         for position in positions:
-            StockProduct.objects.create(stock=stock,
-                                        product=position['product'],
-                                        quantity=position['quantity'],
-                                        price=position['price'],)
+            StockProduct.objects.create(stock=stock, **position)
 
         return stock
 
@@ -51,5 +47,7 @@ class StockSerializer(serializers.ModelSerializer):
         # здесь вам надо обновить связанные таблицы
         # в нашем случае: таблицу StockProduct
         # с помощью списка positions
+        for position in positions:
+            StockProduct.objects.update_or_create(stock=stock, **position)
 
         return stock
