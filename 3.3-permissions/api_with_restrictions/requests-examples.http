@@ -40,3 +40,9 @@ Content-Type: application/json
 # фильтрация по дате
 GET {{baseUrl}}/advertisements/?created_at_before=2020-10-01
 Content-Type: application/json
+
+###
+
+# удаление
+DELETE {{baseUrl}}/advertisements/3/
+Authorization: Token 54e635a7e0d5e883b43cc1a6e2e51fbd9a4a8a02
