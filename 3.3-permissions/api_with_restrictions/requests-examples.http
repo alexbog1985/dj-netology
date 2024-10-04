@@ -11,7 +11,7 @@ Content-Type: application/json
 # создание объявления
 POST {{baseUrl}}/advertisements/
 Content-Type: application/json
-Authorization: Token 54e635a7e0d5e883b43cc1a6e2e51fbd9a4a8a02
+Authorization: Token 771e54888204793f5afbd6c8710c0890efce4593
 
 {
   "title": "Шкаф IKEA",
@@ -44,5 +44,6 @@ Content-Type: application/json
 ###
 
 # удаление
-DELETE {{baseUrl}}/advertisements/3/
+DELETE {{baseUrl}}/advertisements/5/
 Authorization: Token 54e635a7e0d5e883b43cc1a6e2e51fbd9a4a8a02
+#Authorization: Token 771e54888204793f5afbd6c8710c0890efce4593
