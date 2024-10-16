@@ -120,3 +120,24 @@ def test_delete_course(client, course_factory):
 
     assert response.status_code == 204
     assert Course.objects.count() == count - 1
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize('max_count, students_count, status_code', [(20, 25, 400), (20, 15, 201), (20, 20, 201)])
+def test_max_limit_students_course(settings, client, course_factory, student_factory,
+                                   max_count, students_count, status_code):
+    """Тест максимального количества студентов на курсе"""
+
+    settings.MAX_STUDENTS_PER_COURSE = max_count
+    course = course_factory()
+    students = student_factory(_quantity=students_count)
+    student_data = {
+        'name': 'Test student',
+        'course': course.id,
+        'student': [student.id for student in students]
+    }
+    url = reverse("courses-list")
+
+    response = client.post(url, data=student_data)
+
+    assert response.status_code == status_code
