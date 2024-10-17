@@ -129,15 +129,13 @@ def test_max_limit_students_course(settings, client, course_factory, student_fac
     """Тест максимального количества студентов на курсе"""
 
     settings.MAX_STUDENTS_PER_COURSE = max_count
-    course = course_factory()
     students = student_factory(_quantity=students_count)
-    student_data = {
+    course_data = {
         'name': 'Test student',
-        'course': course.id,
-        'student': [student.id for student in students]
+        'students': [student.id for student in students]
     }
     url = reverse("courses-list")
 
-    response = client.post(url, data=student_data)
+    response = client.post(url, data=course_data)
 
-    assert response.status_code == status_code
+    assert response.status_code == status_code, response.json()
